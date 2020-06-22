@@ -67,6 +67,7 @@ func (jpa *JSONParse) Perform(input models.RunInput, _ *store.Store) models.RunO
 func dig(js gjson.Result, path []string) (gjson.Result, error) {
 	var ok bool
 	for _, k := range path[:] {
+		k = strings.ReplaceAll(k, `.`, `\.`)
 		if isArray(js, k) {
 			js, ok = arrayGet(js, k)
 		} else {
